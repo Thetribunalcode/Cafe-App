@@ -1,47 +1,121 @@
 <template>
     <TheHeaderVue><span>Cart</span></TheHeaderVue>
 
-    <router-link to="/menu">    <div id="Backward_arrow" class="Backward_arrow">
-		<svg class="Path_10" viewBox="0 0 28 28">
-			<path id="Path_10" d="M 14 0 L 11.45454597473145 2.545454502105713 L 21.09090995788574 12.18181800842285 L 0 12.18181800842285 L 0 15.81818199157715 L 21.09090995788574 15.81818199157715 L 11.45454597473145 25.45454597473145 L 14 28 L 28 14 L 14 0 Z">
-			</path>
-		</svg>
-	</div></router-link>
+    <router-link to="/menu">    
+		<div id="Backward_arrow" class="Backward_arrow">
+			<svg class="Path_10" viewBox="0 0 28 28">
+				<path id="Path_10" d="M 14 0 L 11.45454597473145 2.545454502105713 L 21.09090995788574 12.18181800842285 L 0 12.18181800842285 L 0 15.81818199157715 L 21.09090995788574 15.81818199157715 L 11.45454597473145 25.45454597473145 L 14 28 L 28 14 L 14 0 Z">
+				</path>
+			</svg>
+		</div>
+	</router-link>
+
+	<div id="Group_2">
+		<h2>
+		Quantity | Item | Price
+		</h2>
+	</div>
+
+	<div id="Group_21">
+		<h2 v-for="(item, index) in cartItems" :key="index" class="cartList">
+		{{ item.quantity }} | {{ item.name }} | {{ item.price * item.quantity  }}
+		</h2>
+	</div>
+
 	<div id="Group_4">
 		<svg class="Rectangle_1448">
 			<rect id="Rectangle_1448" rx="10" ry="10" x="0" y="0" width="384" height="72">
 			</rect>
 		</svg>
 		<div id="TOTAL__xx">
-			<span>TOTAL : </span>
+			<span>TOTAL : {{ totalPrice }} </span>
 		</div>
 		<div id="Button_CTA">
 			<svg class="Rectangle_1090">
 				<rect id="Rectangle_1090" rx="10" ry="10" x="0" y="0" width="146" height="50">
 				</rect>
 			</svg>
-			<div @click="check" id="Buy_Now">
+			<div @click="handleNav" id="Buy_Now">
 				<span>order now</span>
 			</div>
 		</div>
 	</div>
-
-
-
 </template>
+
+<style scoped>
+
+</style>
 
 <script>
 import TheHeaderVue from '../../Header/TheHeader.vue';
+import { fetchRecordByID, updateRecordByID } from '../../../../appwrite.config';
+
     export default {
         inject: ['cart'],
         components: {
             TheHeaderVue
         },
-		methods:
-		{
-			check()
-			{
-				console.log(this.cart)
+		data () {
+			return {
+				cartItems: [],
+				ID: 12,
+				totalPrice: 0,
+				items: [
+            {
+                id: 'pcoffee',
+				name: 'Filter Coffee',
+                price: 25,
+            },
+            {
+                id: 'bcoffee',
+				name: 'BY2 Coffee',
+                price: 20,
+
+            },
+            {
+				id: 'vidli',
+                name: 'Vada & Idli',
+                price: 50,
+
+            },
+            {
+                id: 'idli',
+				name: 'Idli',
+                price: 40,
+
+            },
+            {
+                id: 'vada',
+				name: 'Vada',
+                price: 45,
+
+            },
+            {
+                id: 'ridli',
+				name: 'Rava Idli',
+                price: 40,
+
+            },
+            {
+                id: 'mdosa',
+				name: 'Masala Dosa',
+                price: 50,
+            },
+        ],
+			}
+		},
+		async mounted() {
+			const ID = (this.$route.params.id)
+			const res = await fetchRecordByID(ID);
+			this.ID = ID;
+			this.cartItems = res.ItemNames.map((id2, index) => ({name: this.items.find(item => item.id === id2).name, quantity: res.ItemQuantities[index], price: this.items.find(item => item.id === id2).price}))
+			this.totalPrice = res.Total;
+		},
+		methods: {
+			async handleNav() {
+				const res = await updateRecordByID(this.ID);
+				console.log(res)
+				this.$router.push({path: `/confirmation/${this.ID}`});
 			}
 		}
     }
@@ -62,6 +136,7 @@ import TheHeaderVue from '../../Header/TheHeader.vue';
 
 
 <style scoped>
+
 .mediaViewInfo {
 	--web-view-name: Cart;
 	--web-view-id: Cart;
@@ -994,5 +1069,22 @@ import TheHeaderVue from '../../Header/TheHeader.vue';
 	font-weight: normal;
 	font-size: 20px;
 	color: rgba(255,255,255,1);
+}
+#Group_2 {
+	position: absolute;
+	top: 30%;
+	left: 5%;
+	color: white;
+	font-family: Alcester;
+}
+#Group_21 {
+	position: absolute;
+	top: 40%;
+	left: 5%;
+	color: white;
+	font-family: Alcester;
+}
+#cartList{
+	margin: 5%;
 }
 </style>

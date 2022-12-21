@@ -203,7 +203,7 @@
     </div>
 
     <keep-alive>
-    <Tab :number="cart.length"></Tab>
+    <Tab :cart="cart"></Tab>
     </keep-alive>
 </template>
 
