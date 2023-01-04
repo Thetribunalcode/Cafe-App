@@ -5,6 +5,7 @@ import App from './App.vue';
 import Home from './Home.vue';
 import Menu from './components/Menu/Menu.vue';
 import Cart from './components/Counter/Cart/Cart.vue';
+import Bill from './components/Counter/Cart/Bill/Bill.vue'
 import Confirmation from './components/Confirmation/Confirmation.vue';
 
 const router = createRouter({
@@ -13,6 +14,7 @@ const router = createRouter({
     { path: '/home', component: Home },
     { path: '/menu', component: Menu },
     { path: '/cart/:id', component: Cart },
+    { path: '/bill/:id', component: Bill},
     { path: '/confirmation/:id', component: Confirmation },
   ],
 });

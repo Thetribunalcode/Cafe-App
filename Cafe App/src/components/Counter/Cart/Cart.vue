@@ -10,15 +10,17 @@
 		</div>
 	</router-link>
 
-	<div id="Group_2">
-		<h2>
-		Quantity | Item | Price
-		</h2>
-	</div>
+		<div id="quantity">Quantity</div>
+		<div id="item">ITEM</div> 
+		<div id="price">Price</div>
 
 	<div id="Group_21">
 		<h2 v-for="(item, index) in cartItems" :key="index" class="cartList">
-		{{ item.quantity }} | {{ item.name }} | {{ item.price * item.quantity  }}
+			<div id="quantity_1">{{ item.quantity }} </div>
+			<div id="name_1">{{ item.name }}</div>
+			<div id="price_1">
+				{{ item.price * item.quantity  }}
+			</div>
 		</h2>
 	</div>
 
@@ -37,6 +39,7 @@
 			</svg>
 			<div @click="handleNav" id="Buy_Now">
 				<span>order now</span>
+
 			</div>
 		</div>
 	</div>
@@ -58,13 +61,16 @@ import { fetchRecordByID, updateRecordByID } from '../../../../appwrite.config';
 		data () {
 			return {
 				cartItems: [],
+				images: [],
 				ID: 12,
+				tran_id: 0,
 				totalPrice: 0,
 				items: [
             {
                 id: 'pcoffee',
 				name: 'Filter Coffee',
                 price: 25,
+
             },
             {
                 id: 'bcoffee',
@@ -105,17 +111,20 @@ import { fetchRecordByID, updateRecordByID } from '../../../../appwrite.config';
 			}
 		},
 		async mounted() {
-			const ID = (this.$route.params.id)
-			const res = await fetchRecordByID(ID);
-			this.ID = ID;
+			this.ID = (this.$route.params.id)
+			this.tran_id = (this.$route.params.id)
+			const res = await fetchRecordByID(this.ID);
 			this.cartItems = res.ItemNames.map((id2, index) => ({name: this.items.find(item => item.id === id2).name, quantity: res.ItemQuantities[index], price: this.items.find(item => item.id === id2).price}))
+			// this.images= this.items.filter( (item) => item.name === this.cartItems.map( (id) => id.name) )
+			this.images = res.ItemNames
+			console.log(this.images)
 			this.totalPrice = res.Total;
 		},
 		methods: {
 			async handleNav() {
 				const res = await updateRecordByID(this.ID);
 				console.log(res)
-				this.$router.push({path: `/confirmation/${this.ID}`});
+				this.$router.push({path: `/bill/${this.ID}`, replace: true});
 			}
 		}
     }
@@ -147,8 +156,6 @@ import { fetchRecordByID, updateRecordByID } from '../../../../appwrite.config';
 	--web-view-ids: Cart;
 }
 * {
-	margin: 0;
-	padding: 0;
 	box-sizing: border-box;
 	border: none;
 }
@@ -279,6 +286,7 @@ import { fetchRecordByID, updateRecordByID } from '../../../../appwrite.config';
 	left: 0px;
 	top: 0px;
 }
+
 #TOTAL__xx {
 	left: 27px;
 	top: 16px;
@@ -459,6 +467,23 @@ import { fetchRecordByID, updateRecordByID } from '../../../../appwrite.config';
 }
 #ic_remove_24px_ {
 	fill: rgba(68,9,3,1);
+}
+#waste1
+{
+	position: absolute;
+	left: 100%;
+
+}
+#waste2
+{
+	position: absolute;
+	left: 250%;
+}
+
+#waste
+{
+	position: absolute;
+	left: 500%;
 }
 .ic_remove_24px_ {
 	overflow: visible;
@@ -1006,6 +1031,17 @@ import { fetchRecordByID, updateRecordByID } from '../../../../appwrite.config';
 	font-size: 20px;
 	color: rgba(255,255,255,1);
 }
+#Menu {
+	position: absolute;
+	width: 414px;
+	height: 700px;
+	background-color: rgba(25,10,6,1);
+	overflow: hidden;
+	--web-view-name: Menu;
+	--web-view-id: Menu;
+	--web-scale-on-resize: true;
+	--web-enable-deep-linking: true;
+}
 #IDLI_2_nos {
 	left: 32px;
 	top: 383px;
@@ -1070,21 +1106,50 @@ import { fetchRecordByID, updateRecordByID } from '../../../../appwrite.config';
 	font-size: 20px;
 	color: rgba(255,255,255,1);
 }
-#Group_2 {
-	position: absolute;
-	top: 30%;
-	left: 5%;
-	color: white;
-	font-family: Alcester;
-}
 #Group_21 {
-	position: absolute;
-	top: 40%;
-	left: 5%;
+	position: relative;
+	top: 220px;
 	color: white;
 	font-family: Alcester;
 }
-#cartList{
-	margin: 5%;
+#quantity
+{
+	position: absolute;
+	top: 35%;
+	left: 3%;
+	color: white;
+	font-family: Alcester;
 }
+#item
+{
+	position: absolute;
+	top: 35.2%;
+	left: 15%;
+	color: white;
+	font-family: Alcester;
+}
+#price
+{
+	position: absolute;
+	top: 35.2%;
+	left: 26.5%;
+	color: white;
+	font-family: Alcester;
+}
+#quantity_1
+{
+	position: absolute;
+	left: 50px;
+}
+#name_1
+{
+	position: absolute;
+	left: 150px;
+}
+#price_1
+{
+	position: relative;
+	left: 330px;
+}
+
 </style>
