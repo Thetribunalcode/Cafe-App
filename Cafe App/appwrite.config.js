@@ -25,6 +25,7 @@ const addRecordsToDatabase = async (data) => {
 const listRecordsInDatabase = (pageNo) => {
   try {
     const res = databases.listDocuments(
+      '63a2eed7720f5e0cefa3',
       '63a2eefdb65a5fc87330', // collectionId
       [], // queries
       10, // limit
@@ -67,10 +68,26 @@ const updateRecordByID = (ID) => {
   }
 };
 
+const updateOrderByID = (ID) => {
+  try {
+    const res = databases.updateDocument(
+      '63a2eed7720f5e0cefa3',
+      '63a2eefdb65a5fc87330',
+      ID,
+      { processed: true }
+    );
+    return res;
+  } catch (err) {
+    return err;
+  }
+};
+
+
 //--------------------------------------------- Exports ---------------------------------------------//
 export {
   listRecordsInDatabase,
   addRecordsToDatabase,
   fetchRecordByID,
   updateRecordByID,
+  updateOrderByID
 };
