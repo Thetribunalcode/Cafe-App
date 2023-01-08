@@ -36,7 +36,8 @@ export default {
 				TransactionID: (Math.random() * 1000000).toFixed(0),
 				Total: this.cart.reduce((total, item) => total + item.count * item.price, 0),
 				CustomerName: 'Test',
-				AmountPaid: false 
+				AmountPaid: false,
+				processed: false
 			}
 			const res = await addRecordsToDatabase(order);
 			console.log(res);
