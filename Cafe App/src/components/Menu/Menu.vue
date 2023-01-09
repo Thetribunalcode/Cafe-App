@@ -14,6 +14,20 @@ export default {
         TheHeader,
         Grid,
         Counter
+    },
+    data()
+    {
+        return {
+            type: ""
+        }
+    },
+    provide(){
+        return{        type: this.type}
+
+    },
+    async mounted() {
+			this.type = (this.$route.params.type)
     }
+    
 }
 </script>

@@ -27,10 +27,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #Menu {
   position: absolute;
-  width: 414px;
+  width: 500px;
   height: 1214px;
   background-color: rgba(25, 10, 6, 1);
   overflow: hidden;
@@ -52,8 +52,8 @@ export default {
   position: absolute;
   width: 433px;
   height: 43px;
-  left: -9px;
-  top: 118px;
+  left: -8px;
+  top: 113px;
   overflow: visible;
 }
 #logo_bg {
@@ -87,7 +87,7 @@ export default {
 }
 #MENU {
   left: 183px;
-  top: 5px;
+  top: -7px;
   position: absolute;
   overflow: visible;
   width: 67px;

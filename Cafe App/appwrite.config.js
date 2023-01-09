@@ -1,4 +1,4 @@
-import { Client, Databases } from 'appwrite';
+import { Client, Databases, Query } from 'appwrite';
 
 //--------------------------------------------- SDK Setup ---------------------------------------------//
 const client = new Client();
@@ -22,18 +22,16 @@ const addRecordsToDatabase = async (data) => {
   }
 };
 
-const listRecordsInDatabase = (pageNo) => {
+const listRecordsInDatabase = () => {
   try {
     const res = databases.listDocuments(
       '63a2eed7720f5e0cefa3',
       '63a2eefdb65a5fc87330', // collectionId
-      [], // queries
-      10, // limit
-      0 * pageNo, // offset
-      '1', // cursor
-      'after', // cursorDirection
-      ['date'], // orderAttributes
-      ['ASC'] // orderTypes
+      [
+        Query.equal('processed', [false]),
+        Query.orderDesc("$createdAt"),
+        Query.limit(100)
+      ]
     );
     return res;
   } catch (err) {

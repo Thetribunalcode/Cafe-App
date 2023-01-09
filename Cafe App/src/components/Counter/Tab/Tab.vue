@@ -18,6 +18,7 @@
 			<div id="view_cart" @click="handleSubmit">
 				<span >view cart</span>
 			</div>
+
 		</div>
 	</div>
 </template>
@@ -28,13 +29,25 @@ import { addRecordsToDatabase } from '../../../../appwrite.config';
 
 export default {
     props: ['cart'],
+	inject: ['type'],
+	data(){
+		return {
+			type: this.$route.params.type
+		}
+	},
 	methods: {
 		async handleSubmit() {
+
+			console.log(this.type)
+			let total = this.cart.reduce((total, item) => total + item.count * item.price, 0)
+			if ( this.$route.params.type === 'takeaway'){
+				total+=0.1*total
+			}
 			const order = {
 				ItemNames: this.cart.map((item) => item.id),
 				ItemQuantities: this.cart.map((item) => item.count),
 				TransactionID: (Math.random() * 1000000).toFixed(0),
-				Total: this.cart.reduce((total, item) => total + item.count * item.price, 0),
+				Total: total,
 				CustomerName: 'Test',
 				AmountPaid: false,
 				processed: false

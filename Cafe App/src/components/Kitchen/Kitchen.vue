@@ -1,7 +1,8 @@
 <template>
     <div class="flex flex-row space-x-4 gap-2 main">
         <h1 class="mb-2 text-4xl font-bold tracking-tight text-black dark:text-black">Kitchen</h1>
-    <div v-for="order in orders" :key="order.$id" class=" text-center max-w-lg w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <h2 v-if="orders.length===0" class="mb-2 text-2xl font-bold tracking-tight text-black dark:text-black">All done!</h2>
+    <div v-for="order in orders" :key="order.$id" class="text-center max-w-lg w-full p-6 bg-black border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
      
             <h5 class="mb-2 text-center text-2xl font-bold tracking-tight text-white dark:text-white">Order {{order.TransactionID}} </h5>
 
@@ -62,7 +63,8 @@ export default{
             },
             async stateGetter() {
                 let res = await listRecordsInDatabase();
-                this.orders = (res.documents.filter( item => (item.processed==false || item.processed==null )))
+                console.log(res)
+                this.orders = (res.documents)
             }
 		}
 

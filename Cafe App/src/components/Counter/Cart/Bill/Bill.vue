@@ -1,6 +1,6 @@
 <template>
+  <div id="Order_DetailsBill">
   <TheHeaderVue><span>Bill</span></TheHeaderVue>
-
   <div id="your_order_number_is_">
     <span>your order number is </span>
   </div>
@@ -56,6 +56,7 @@
   <svg class="Line_3" viewBox="0 0 414 3">
     <path id="Line_3" d="M 0 0 L 414 0"></path>
   </svg>
+  </div>
 </template>
 
 <script>
@@ -127,6 +128,7 @@ export default {
 };
 </script>
 
+
 <style scoped>
 .mediaViewInfo {
   --web-view-name: Order Details/Bill;
@@ -138,15 +140,13 @@ export default {
   --web-view-ids: Order_DetailsBill;
 }
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   border: none;
 }
 #Order_DetailsBill {
   position: absolute;
   width: 414px;
-  height: 736px;
+  height: 1214px;
   background-color: rgba(25, 10, 6, 1);
   overflow: hidden;
   --web-view-name: Order Details/Bill;
@@ -497,17 +497,6 @@ export default {
   font-weight: normal;
   font-size: 20px;
   color: rgba(255, 255, 255, 1);
-}
-#Menu {
-	position: absolute;
-	width: 414px;
-	height: 900px;
-	background-color: rgba(25,10,6,1);
-	overflow: hidden;
-	--web-view-name: Menu;
-	--web-view-id: Menu;
-	--web-scale-on-resize: true;
-	--web-enable-deep-linking: true;
 }
 #hhmmss {
   left: 320px;

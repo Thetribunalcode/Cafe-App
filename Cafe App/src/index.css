@@ -1,4 +1,11 @@
+@font-face
+{
+  font-family: "alcester";
+  src: url('assets/fonts/alcester-maisfontes.38c2/alcester.ttf');
+}
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+

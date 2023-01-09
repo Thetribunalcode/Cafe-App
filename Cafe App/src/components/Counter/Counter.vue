@@ -224,6 +224,7 @@ export default {
     {   
         return {
         cart: [],
+        props: ['type'],
         items: [
             {
                 id: 'pcoffee',

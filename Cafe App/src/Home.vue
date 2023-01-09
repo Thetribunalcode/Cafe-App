@@ -13,7 +13,7 @@
         height="789"
       ></rect>
     </svg>
-    <router-link to="/menu"
+    <router-link to="/menu/takeaway"
       ><div id="Button_CTA_da">
         <svg class="Rectangle_1090_da">
           <rect
@@ -31,7 +31,7 @@
         </div>
       </div></router-link
     >
-    <router-link to="/menu">    <div id="Button_CTA_db">
+    <router-link to="/menu/dine-in">    <div id="Button_CTA_db">
         <svg class="Rectangle_1090_dc">
           <rect
             id="Rectangle_1090_dc"
@@ -72,8 +72,8 @@
 }
 #Home_Page {
   position: absolute;
-  width: 414px;
-  height: 736px;
+  width: 425px;
+  height: 100vh;
   background-color: rgba(255, 255, 255, 1);
   overflow: hidden;
   --web-view-name: Home Page;
@@ -93,7 +93,7 @@
   filter: blur(2px);
   position: absolute;
   width: 425px;
-  height: 756px;
+  height: 100vh;
   left: -11px;
   top: -10px;
   overflow: visible;
@@ -113,7 +113,7 @@
   position: absolute;
   overflow: visible;
   width: 438px;
-  height: 789px;
+  height: 100vh;
   left: -10px;
   top: -19px;
 }

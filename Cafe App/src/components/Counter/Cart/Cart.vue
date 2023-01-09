@@ -1,4 +1,5 @@
 <template>
+	<div id="Cart">
     <TheHeaderVue><span>Cart</span></TheHeaderVue>
 
     <router-link to="/menu">    
@@ -10,11 +11,12 @@
 		</div>
 	</router-link>
 
-		<div id="quantity">Quantity</div>
-		<div id="item">ITEM</div> 
-		<div id="price">Price</div>
+
 
 	<div id="Group_21">
+		<div id="quantity_1" style="font-size:20px;">Quantity</div>
+		<div id="name_1" style="font-size:20px;">ITEM</div> 
+		<div id="price_1" style="font-size:20px;">Price</div>
 		<h2 v-for="(item, index) in cartItems" :key="index" class="cartList">
 			<div id="quantity_1">{{ item.quantity }} </div>
 			<div id="name_1">{{ item.name }}</div>
@@ -42,6 +44,7 @@
 
 			</div>
 		</div>
+	</div>
 	</div>
 </template>
 
@@ -162,7 +165,7 @@ import { fetchRecordByID, updateRecordByID } from '../../../../appwrite.config';
 #Cart {
 	position: absolute;
 	width: 414px;
-	height: 20px;
+	height: 1000px;
 	background-color: rgba(25,10,6,1);
 	overflow: hidden;
 	--web-view-name: Cart;
@@ -1114,9 +1117,6 @@ import { fetchRecordByID, updateRecordByID } from '../../../../appwrite.config';
 }
 #quantity
 {
-	position: absolute;
-	top: 35%;
-	left: 3%;
 	color: white;
 	font-family: Alcester;
 }
